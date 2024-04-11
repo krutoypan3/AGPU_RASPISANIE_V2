@@ -47,6 +47,7 @@ class Human(
     /**
      * Попытка - 3
      * 906878697895786
+     * НУ блэ я всё ещё нищий
      */
     var age: Int,
     var name: String,
