@@ -48,6 +48,8 @@ class Human(
      * Hi, Aom
      * Два коммита соеденены :)
      * Привет моя кукуха
+     *
+     * Как я могу быть нищим?
      */
     var age: Int,
     var name: String,
