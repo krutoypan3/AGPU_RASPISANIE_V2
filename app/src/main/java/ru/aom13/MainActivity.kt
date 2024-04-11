@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
 class Human(
     /**
-     * Попытка - 7
+     * Изизи
      *
      * Привет!!!
      */
