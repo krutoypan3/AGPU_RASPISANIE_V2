@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 
 class Human(
     /**
-     * Попытка - 2
+     * Попытка - 3
      */
     var age: Int,
     var name: String,
