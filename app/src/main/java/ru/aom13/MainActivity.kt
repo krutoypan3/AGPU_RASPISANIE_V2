@@ -109,4 +109,9 @@ fun ShowMyPreview() {
         }
     }
 }
+@Composable
+private fun BottomNavigation(modifier: Modifier = Modifier){
+
+}
+
 
