@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -109,8 +110,22 @@ fun ShowMyPreview() {
         }
     }
 }
+
+/**
+ * начало было фиговое
+ * функции для экранов наверное
+ */
 @Composable
-private fun BottomNavigation(modifier: Modifier = Modifier){
+fun Screen1() {
+
+}
+
+@Composable
+fun Screen2() {
+
+}
+@Composable
+private fun BottomNavigation(){
 
 }
 
