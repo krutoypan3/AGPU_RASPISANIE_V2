@@ -17,6 +17,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -135,7 +140,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier){
     ) {
         NavigationBarItem(
             icon = {
-
+                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
             },
             label = {
                 Text(text = "Профиль")
@@ -145,7 +150,7 @@ private fun BottomNavigation(modifier: Modifier = Modifier){
         )
         NavigationBarItem(
             icon = {
-
+                Icon(imageVector = Icons.Default.Email, contentDescription = null)
             },
             label = {
                 Text(text = "Что-то ещё")
