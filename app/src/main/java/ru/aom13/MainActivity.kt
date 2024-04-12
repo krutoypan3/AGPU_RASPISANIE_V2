@@ -1,7 +1,6 @@
 package ru.aom13
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,8 +18,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -121,10 +118,19 @@ fun ShowMyPreview() {
 
 /**
  * начало было фиговое
- * функции для экранов наверное
- */
+ * функции для экранов наверное будут
+
+
+class User(
+    val photo: Int,
+    val name: String,
+    val status: String = "",
+    val followersCount: Int,
+    val followingCount: Int
+)
+
 @Composable
-fun Screen1() {
+fun Screen1(user : User) {
 
 }
 
@@ -132,6 +138,7 @@ fun Screen1() {
 fun Screen2() {
 
 }
+*/
 @Preview
 @Composable
 private fun BottomNavigation(modifier: Modifier = Modifier){
