@@ -1,6 +1,5 @@
 package ru.aom13
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,8 +8,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -29,11 +30,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import ru.aom13.model.User
 import ru.aom13.ui.theme.ArtikProjectV2Theme
 
 class MainActivity : ComponentActivity() {
@@ -42,92 +46,132 @@ class MainActivity : ComponentActivity() {
         setContent {
             ArtikProjectV2Theme {
                 Surface {
-                    ShowMyPreview()
+//                    ShowUser()
                 }
             }
         }
     }
 }
 
-class Human(
-    /**
-     * Попытка - 8
-     * И, да, да, да. Я до сих пор нищий
-     * Понимаю, я тоже нищая
-     */
-    var age: Int,
-    var name: String,
-    var height: Int,    // Рост в см
-    var photo: Int,     // ID фото в ресурсах
-)
 
+@Preview
 @Composable
-fun ShowHuman(human: Human) {
-    var isOpen by remember { mutableStateOf(false) }
-
-    Row(
-        modifier = Modifier
-            .clip(CircleShape)
-            .animateContentSize()
-            .padding(10.dp)
-            .clickable { isOpen = !isOpen }
-            .background(
-                color = if (isOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.background,
-                shape = RoundedCornerShape(10.dp)
-            ),
-    ) {
-        Image(
-            painter = painterResource(id = human.photo),
-            modifier = Modifier
-                .padding(end = 5.dp)
-                .clip(CircleShape)
-                .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
-                .size(24.dp),
-            contentDescription = "asdasdas"
-
-        )
-        Text(
-            text = "${human.name}: ${human.age} лет, ${human.height} см",
-            maxLines = if (isOpen) 10 else 1,
-            style = MaterialTheme.typography.titleSmall
-        )
-    }
-}
-
-
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Preview(showBackground = true)
-@Composable
-fun ShowMyPreview() {
+fun UsersPreview() {
     ArtikProjectV2Theme {
         Surface {
             Column {
-                ShowHuman(human = Human(18, "Antonina Sergeevna Sergeevna Sergeevna", 187, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela\nПривет\nя сдвинулся", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
-                ShowHuman(human = Human(21, "Angela", 145, R.drawable.ic_launcher_background))
+                UserCard(
+                    user = User(
+                        name = "Елизавета",
+                        photoResId = R.drawable.liza,
+                        status = "Котлин это круто!",
+                        followersCount = 9345876,
+                        followingCount = 3,
+                    )
+                )
+                UserCard(
+                    user = User(
+                        name = "Владислав",
+                        photoResId = R.drawable.vlad,
+                        status = "Что такое компост? Я не понимаю, помогите пожалуйста...",
+                        followersCount = 777,
+                        followingCount = 65,
+                    )
+                )
+                UserCard(
+                    user = User(
+                        name = "Эдгар",
+                        photoResId = R.drawable.ed,
+                        status = "ЫЫЫ, мама, я в телеке!!! Всем привеееееееет!!!!!!",
+                        followersCount = 333,
+                        followingCount = 42,
+                    )
+                )
+                UserCard(
+                    user = User(
+                        name = "Артем",
+                        photoResId = R.drawable.artem,
+                        status = "Хелп ми плез",
+                        followersCount = 6351,
+                        followingCount = 128,
+                    )
+                )
             }
         }
     }
 }
 
+@Composable
+fun UserCard(user: User) {
+    var isOpen by remember { mutableStateOf(false) }
+    Row(
+        modifier = Modifier
+            .clip(RoundedCornerShape(10.dp))
+            .animateContentSize()
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp, vertical = 5.dp)
+            .clickable { isOpen = !isOpen }
+            .background(
+                color = if (isOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(10.dp)
+            ),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = user.photoResId),
+            modifier = Modifier
+                .padding(5.dp)
+                .clip(CircleShape)
+                .border(1.5.dp, MaterialTheme.colorScheme.secondary, CircleShape)
+                .size(80.dp),
+            contentDescription = null
+        )
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(8.dp),
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                text = user.name,
+                maxLines = if (isOpen) 10 else 1,
+                style = MaterialTheme.typography.titleLarge,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = user.status,
+                maxLines = if (isOpen) 10 else 2,
+                style = MaterialTheme.typography.titleSmall,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(8.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = "Подписчиков: ${user.followersCount}",
+                maxLines = if (isOpen) 10 else 2,
+                style = MaterialTheme.typography.titleSmall,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = "Подписок: ${user.followingCount}",
+                maxLines = if (isOpen) 10 else 3,
+                style = MaterialTheme.typography.titleSmall,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
+    }
+}
+
+
 /**
  * начало было фиговое
  * функции для экранов наверное будут
-
-
-class User(
-    val photo: Int,
-    val name: String,
-    val status: String = "",
-    val followersCount: Int,
-    val followingCount: Int
-)
 
 @Composable
 fun Screen1(user : User) {
