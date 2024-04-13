@@ -15,7 +15,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -109,4 +115,57 @@ fun ShowMyPreview() {
         }
     }
 }
+
+/**
+ * начало было фиговое
+ * функции для экранов наверное будут
+
+
+class User(
+    val photo: Int,
+    val name: String,
+    val status: String = "",
+    val followersCount: Int,
+    val followingCount: Int
+)
+
+@Composable
+fun Screen1(user : User) {
+
+}
+
+@Composable
+fun Screen2() {
+
+}
+*/
+@Preview
+@Composable
+private fun BottomNavigation(modifier: Modifier = Modifier){
+    NavigationBar(
+        modifier = modifier
+    ) {
+        NavigationBarItem(
+            icon = {
+                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
+            },
+            label = {
+                Text(text = "Профиль")
+            },
+            selected = true,
+            onClick = {}
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(imageVector = Icons.Default.Email, contentDescription = null)
+            },
+            label = {
+                Text(text = "Что-то ещё")
+            },
+            selected = false,
+            onClick = {}
+        )
+    }
+}
+
 
