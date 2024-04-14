@@ -27,6 +27,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -57,6 +58,9 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun UsersPreview() {
+    var isOpen by remember { mutableStateOf(false) }
+    var openId by remember { mutableIntStateOf(0) }
+
     ArtikProjectV2Theme {
         Surface {
             Column {
@@ -67,7 +71,16 @@ fun UsersPreview() {
                         status = "Котлин это круто!",
                         followersCount = 9345876,
                         followingCount = 3,
-                    )
+                    ),
+                    if (openId == 1) isOpen else false,
+                    openClick = {
+                        isOpen = if (openId == 1) {
+                            !isOpen
+                        } else {
+                            true
+                        }
+                        openId = 1
+                    }
                 )
                 UserCard(
                     user = User(
@@ -76,7 +89,16 @@ fun UsersPreview() {
                         status = "Что такое компост? Я не понимаю, помогите пожалуйста...",
                         followersCount = 777,
                         followingCount = 65,
-                    )
+                    ),
+                    if (openId == 2) isOpen else false,
+                    openClick = {
+                        isOpen = if (openId == 2) {
+                            !isOpen
+                        } else {
+                            true
+                        }
+                        openId = 2
+                    }
                 )
                 UserCard(
                     user = User(
@@ -85,7 +107,16 @@ fun UsersPreview() {
                         status = "ЫЫЫ, мама, я в телеке!!! Всем привеееееееет!!!!!!",
                         followersCount = 333,
                         followingCount = 42,
-                    )
+                    ),
+                    if (openId == 3) isOpen else false,
+                    openClick = {
+                        isOpen = if (openId == 3) {
+                            !isOpen
+                        } else {
+                            true
+                        }
+                        openId = 3
+                    }
                 )
                 UserCard(
                     user = User(
@@ -94,7 +125,16 @@ fun UsersPreview() {
                         status = "Хелп ми плез",
                         followersCount = 6351,
                         followingCount = 128,
-                    )
+                    ),
+                    if (openId == 4) isOpen else false,
+                    openClick = {
+                        isOpen = if (openId == 4) {
+                            !isOpen
+                        } else {
+                            true
+                        }
+                        openId = 4
+                    }
                 )
             }
         }
@@ -102,15 +142,14 @@ fun UsersPreview() {
 }
 
 @Composable
-fun UserCard(user: User) {
-    var isOpen by remember { mutableStateOf(false) }
+fun UserCard(user: User, isOpen: Boolean, openClick: () -> Unit) {
     Row(
         modifier = Modifier
             .clip(RoundedCornerShape(10.dp))
             .animateContentSize()
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 5.dp)
-            .clickable { isOpen = !isOpen }
+            .clickable { openClick() }
             .background(
                 color = if (isOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(10.dp)
             ),
