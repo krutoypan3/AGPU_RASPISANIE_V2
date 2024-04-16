@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -28,7 +30,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -58,84 +59,55 @@ class MainActivity : ComponentActivity() {
 @Preview
 @Composable
 fun UsersPreview() {
-    var isOpen by remember { mutableStateOf(false) }
     var openId by remember { mutableIntStateOf(0) }
+    val users = listOf(
+        User(
+            name = "Елизавета",
+            photoResId = R.drawable.liza,
+            status = "Котлин это круто!",
+            followersCount = 9345876,
+            followingCount = 3,
+            userId = 1
+        ),
+        User(
+            name = "Владислав",
+            photoResId = R.drawable.vlad,
+            status = "Что такое компост? Я не понимаю, помогите пожалуйста...",
+            followersCount = 777,
+            followingCount = 65,
+            userId = 2
+        ),
+        User(
+            name = "Эдгар",
+            photoResId = R.drawable.ed,
+            status = "ЫЫЫ, мама, я в телеке!!! Всем привеееееееет!!!!!!",
+            followersCount = 333,
+            followingCount = 42,
+            userId = 3
+        ),
+        User(
+            name = "Артем",
+            photoResId = R.drawable.artem,
+            status = "Хелп ми плез",
+            followersCount = 6351,
+            followingCount = 128,
+            userId = 4
+        )
+    )
 
     ArtikProjectV2Theme {
         Surface {
-            Column {
-                UserCard(
-                    user = User(
-                        name = "Елизавета",
-                        photoResId = R.drawable.liza,
-                        status = "Котлин это круто!",
-                        followersCount = 9345876,
-                        followingCount = 3,
-                    ),
-                    if (openId == 1) isOpen else false,
-                    openClick = {
-                        isOpen = if (openId == 1) {
-                            !isOpen
-                        } else {
-                            true
+            LazyColumn {
+                items(users){
+                    UserCard(
+                        user = it,
+                        isOpen = it.userId == openId,
+                        openClick = {
+                            openId = it.userId
                         }
-                        openId = 1
-                    }
-                )
-                UserCard(
-                    user = User(
-                        name = "Владислав",
-                        photoResId = R.drawable.vlad,
-                        status = "Что такое компост? Я не понимаю, помогите пожалуйста...",
-                        followersCount = 777,
-                        followingCount = 65,
-                    ),
-                    if (openId == 2) isOpen else false,
-                    openClick = {
-                        isOpen = if (openId == 2) {
-                            !isOpen
-                        } else {
-                            true
-                        }
-                        openId = 2
-                    }
-                )
-                UserCard(
-                    user = User(
-                        name = "Эдгар",
-                        photoResId = R.drawable.ed,
-                        status = "ЫЫЫ, мама, я в телеке!!! Всем привеееееееет!!!!!!",
-                        followersCount = 333,
-                        followingCount = 42,
-                    ),
-                    if (openId == 3) isOpen else false,
-                    openClick = {
-                        isOpen = if (openId == 3) {
-                            !isOpen
-                        } else {
-                            true
-                        }
-                        openId = 3
-                    }
-                )
-                UserCard(
-                    user = User(
-                        name = "Артем",
-                        photoResId = R.drawable.artem,
-                        status = "Хелп ми плез",
-                        followersCount = 6351,
-                        followingCount = 128,
-                    ),
-                    if (openId == 4) isOpen else false,
-                    openClick = {
-                        isOpen = if (openId == 4) {
-                            !isOpen
-                        } else {
-                            true
-                        }
-                        openId = 4
-                    }
-                )
+                    )
+
+                }
             }
         }
     }
@@ -151,7 +123,8 @@ fun UserCard(user: User, isOpen: Boolean, openClick: () -> Unit) {
             .padding(horizontal = 10.dp, vertical = 5.dp)
             .clickable { openClick() }
             .background(
-                color = if (isOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer, shape = RoundedCornerShape(10.dp)
+                color = if (isOpen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.primaryContainer,
+                shape = RoundedCornerShape(10.dp)
             ),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically

@@ -8,4 +8,5 @@ data class User(
     val status: String = "",
     val followersCount: Int,
     val followingCount: Int,
+    val userId: Int,
 )
